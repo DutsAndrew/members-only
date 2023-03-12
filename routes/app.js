@@ -5,6 +5,8 @@ const express = require('express'),
       userController = require('../controllers/userController');
 
 router.get('/', appController.index);
-router.get('/sign-up', userController.sign_up);
+
+router.get('/sign-up', userController.get_sign_up);
+router.post('/sign-up', userController.post_sign_up)
 
 module.exports = router;

@@ -1,8 +1,80 @@
 const { body, validationResult } = require('express-validator');
-const User = require('../models/user');
+      User = require('../models/user'),
+      bcrypt = require('bcryptjs');
 
-exports.sign_up = (req, res, next) => {
+exports.get_sign_up = (req, res, next) => {
   res.render("account-create", {
-    title: "Create Your Account:"
+    title: "Create Your Account:",
   });
 };
+
+exports.post_sign_up = [
+  body("firstName", "First name is required")
+    .trim()
+    .isLength({ min: 1, max: 1000 })
+    .withMessage("First names must fit our criteria of at least 1 character and no more than 1000 characters.")
+    .escape(),
+  body("lastName", "Last name is required")
+    .trim()
+    .isLength({ min: 1, max: 1000 })
+    .withMessage("First names must fit our criteria of at least 1 character and no more than 1000 characters.")
+    .escape(),
+  body("username", "A username is required")
+    .trim()
+    .isLength({ min: 1, max: 20 })
+    .withMessage("Usernames must fit our 20 character limit")
+    .escape(),
+  body("email", "Emails are required")
+    .trim()
+    .normalizeEmail()
+    .isEmail()
+    .isLength({ min: 1, max: 100 })
+    .withMessage("Your email must fit our constraints of at least 1 character and no more than 100 characters.")
+    .escape(),
+  body("password", "Passwords are required")
+    .trim()
+    .isLength({ min: 1, max: 1000 })
+    .withMessage("Your password must fit our constraints of at least one character and no more than 1000 characters.")
+    .escape(),
+  body("confirmPassword", "Passwords confirmations are required")
+    .trim()
+    .isLength({ min: 1, max: 1000 })
+    .withMessage("Your password confirmation must fit our constraints of at least one character and no more than 1000 characters.")
+    .custom((value, { req }) => value === req.body.password)
+    .withMessage('Password confirmation does not match password')
+    .escape(),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.render("account-create", {
+        title: "Create Your Account:",
+        user: {
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          username: req.body.username,
+          password: req.body.password,
+        },
+        errors: errors.array(),
+      });
+    } else {
+      bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+        if (err) return next(err);
+        const user = new User({
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          username: req.body.username,
+          email: req.body.email,
+          password: hashedPassword,
+          role: 'basic',
+        });
+        try {
+          const result = await user.save();
+          res.redirect('/app');
+        } catch(err) {
+          return next(err);
+        };
+      });
+    };
+  },
+];
