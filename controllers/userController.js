@@ -97,13 +97,6 @@ exports.post_log_in = [
     .isLength({ min: 1, max: 1000 })
     .withMessage("Your password must fit our constraints of at least one character and no more than 1000 characters.")
     .escape(),
-  body("confirmPassword", "Passwords confirmations are required")
-    .trim()
-    .isLength({ min: 1, max: 1000 })
-    .withMessage("Your password confirmation must fit our constraints of at least one character and no more than 1000 characters.")
-    .custom((value, { req }) => value === req.body.password)
-    .withMessage('Password confirmation does not match password')
-    .escape(),
 
   (req, res, next) => {
     const errors = validationResult(req);
@@ -112,15 +105,18 @@ exports.post_log_in = [
         title: "Log In:",
         credentials: {
           username: req.body.username,
-        }
+          password: req.body.password,
+        },
       });
     } else {
-      passport.authenticate("local", {
-        successRedirect: "/",
-        failureRedirect: "/",
-      });
+     next();
     };
   },
+
+  passport.authenticate("local", {
+    successRedirect: "/app",
+    failureRedirect: "/app/log-in",
+  }),
 ];
 
 exports.get_log_out = (req, res, next) => {

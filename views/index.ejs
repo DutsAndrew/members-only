@@ -5,8 +5,20 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <%- include('auth-sidebar') -%>
+    <% if (typeof(user) !== 'undefined') { %>
+      <a href="/app/log-out">
+        <button class="sign-out-btn">
+          Sign Out
+        </button>
+      </a>
+    <% } else { %>
+      <%- include('auth-sidebar') -%>
+    <% }; %>
+    
     <h1><%= title %></h1>
+    <% if (typeof(user) !== 'undefined') { %>
+      <h2><%= userMessage + user.username %></h2>
+    <% }; %>
     <p><%= welcome %></p>
   </body>
 </html>
