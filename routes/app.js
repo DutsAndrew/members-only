@@ -5,5 +5,6 @@ const express = require('express'),
       userController = require('../controllers/userController');
 
 router.get('/', appController.index);
+router.get('/sign-up', userController.sign_up);
 
 module.exports = router;
