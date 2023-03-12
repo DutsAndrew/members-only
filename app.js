@@ -5,8 +5,12 @@ const createError = require('http-errors'),
       logger = require('morgan'),
       indexRouter = require('./routes/index'),
       appRouter = require('./routes/app'),
+      User = require('./models/user');
       mongoose = require('mongoose'),
       bcrypt = require('bcryptjs');
+      session = require('express-session'),
+      LocalStrategy = require('passport-local'),
+      passport = require('passport');
       app = express();
 
 require("dotenv").config();
@@ -16,7 +20,9 @@ mongoose.set('strictQuery', false);
 const mongoDB = process.env.devDB;
 (async function main() {
   try {
-    await mongoose.connect(mongoDB);
+    await mongoose.connect(mongoDB, { useUnifiedTopology: true, useNewUrlParser: true});
+    const db = mongoose.connection;
+    db.on('error', console.error.bind(console, "mongo connection error"));
   } catch(err) {
     console.error(err);
   };
@@ -28,12 +34,50 @@ const mongoDB = process.env.devDB;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(session({ secret: process.env.secret, resave: false, saveUninitialized: true}));
+
+passport.use(
+  new LocalStrategy(async(username, password, done) => {
+    try {
+      const user = await User.findOne({ username: username });
+      bcrypt.compare(password, user.password, (err, res) => {
+        if (res) {
+          return done(null, user);
+        } else {
+          return done(null, false, { message: "Incorrect password"});
+        }
+      });
+    } catch(error) {
+      // no user was found
+      return done(null, false, { message: "Incorrect username" });
+    };
+  })
+);
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async function(id, done) {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch(err) {
+    done(err);
+  };
+});
+
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static('client'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.user;
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/app', appRouter);
