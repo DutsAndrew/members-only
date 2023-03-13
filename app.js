@@ -73,6 +73,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(req, res, next) {
+  // provides user in locals variable for all views
   res.locals.currentUser = req.user;
   next();
 });

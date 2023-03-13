@@ -14,4 +14,6 @@ router.post('/log-in', userController.post_log_in);
 
 router.get('/log-out', userController.get_log_out);
 
+router.post('/member-validation/:id', userController.post_become_member);
+
 module.exports = router;

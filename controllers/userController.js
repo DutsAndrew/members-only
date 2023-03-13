@@ -1,7 +1,8 @@
-const { body, validationResult } = require('express-validator');
+const { body, validationResult } = require('express-validator'),
       User = require('../models/user'),
       bcrypt = require('bcryptjs'),
-      passport = require('passport');
+      passport = require('passport'),
+      async = require('async');
 
 exports.get_sign_up = (req, res, next) => {
   res.render("account-create", {
@@ -22,6 +23,8 @@ exports.post_sign_up = [
     .escape(),
   body("username", "A username is required")
     .trim()
+    .isAlpha()
+    .withMessage('Your username must be in alphabetical characters')
     .isLength({ min: 1, max: 20 })
     .withMessage("Usernames must fit our 20 character limit")
     .escape(),
@@ -125,3 +128,50 @@ exports.get_log_out = (req, res, next) => {
     res.redirect('/app');
   });
 };
+
+exports.post_become_member = [
+  body("memberPassword", "You must enter your member password to verify membership")
+    .trim()
+    .isLength({ min: 1, max: 1000 })
+    .escape(),
+
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.render("index", {
+        title: "Members Only Chat",
+        welcome: "Check out the latest messages:",
+        userMessage: "Welcome back, ",
+        user: currentUser,
+      });
+    } else {
+      if (req.body.memberPassword === process.env.memberAuth) {
+        // membership password was correct
+        try {
+          const user = await User.findById(req.params.id);
+          const updatedUser = new User({
+            firstName: user.firstName,
+            lastName: user.lastName,
+            username: user.username,
+            email: user.email,
+            password: user.password,
+            role: "member",
+            _id: user.id,
+          });
+          const uploadUser = await User.findByIdAndUpdate(req.params.id, updatedUser);
+          res.redirect('/app');
+        } catch(err){
+          return next(err);
+        };
+      } else {
+        // member password was incorrect
+        res.render("index", {
+          title: "Members Only Chat",
+          welcome: "Check out the latest messages:",
+          userMessage: "Welcome back, ",
+          user: currentUser,
+        });
+      };
+    };
+  },
+];

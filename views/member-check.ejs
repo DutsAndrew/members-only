@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <div class="membership-container">
+
+      <% if (typeof(currentUser) !== 'undefined') { %>
+        <% if (currentUser.role === "member") { %>
+          <p>
+            Status: <%= currentUser.role %>
+          </p>
+        <% } else { %>
+          <p>
+            Status: <%= currentUser.role %>
+          </p>
+          <form class="become-member-container" method="POST" action="<%= '/app/member-validation/' + currentUser.id %>">
+            <label for="memberPassword" class="member-info-text">
+              Only members with the secret password are able to see who posts are from. Enter your member password below:
+            </label>
+            <input type="password" name="memberPassword" id="memberPassword">
+            <button class="form-btn" type="submit">
+              Verify Membership
+            </button>
+          </form>
+        </div>
+        <% }; %>
+      <% }; %>
+
+  </body>
+</html>
