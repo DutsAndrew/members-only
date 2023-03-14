@@ -19,7 +19,7 @@ const messageSchema = new Schema({
     minLength: 1,
     maxLength: 1000,
   },
-  owner: [
+  author: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Owner',

@@ -48,7 +48,7 @@ passport.use(
       });
     } catch(error) {
       // no user was found
-      return done(null, false, { message: "Incorrect username" });
+      return done(error);
     };
   })
 );
