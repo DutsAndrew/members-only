@@ -16,7 +16,7 @@ router.get('/log-out', userController.get_log_out);
 
 router.post('/member-validation/:id', userController.post_become_member);
 
-router.get('/create-message', messageController.get_create_message);
-router.post('/create-message', messageController.post_create_message);
+router.get('/create-message/', messageController.get_create_message);
+router.post('/create-message/', messageController.post_create_message);
 
 module.exports = router;

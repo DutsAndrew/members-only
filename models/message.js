@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose'),
+      Schema = mongoose.Schema;
 
 const messageSchema = new Schema({
   title: {
@@ -9,7 +9,7 @@ const messageSchema = new Schema({
     maxLength: 50,
   },
   timestamp: {
-    type: Date(),
+    type: String,
     required: true,
     minLength: 1,
   },
@@ -17,7 +17,7 @@ const messageSchema = new Schema({
     type: String,
     required: true,
     minLength: 1,
-    maxLength: 1000,
+    maxLength: 10000,
   },
   author: [
     {

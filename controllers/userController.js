@@ -54,10 +54,11 @@ exports.post_sign_up = [
       res.render("account-create", {
         title: "Create Your Account:",
         user: new User({
+          email: req.body.email,
           firstName: req.body.firstName,
           lastName: req.body.lastName,
-          username: req.body.username,
           password: req.body.password,
+          username: req.body.username,
         }),
         errors: errors.array(),
       });
@@ -65,11 +66,11 @@ exports.post_sign_up = [
       bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
         if (err) return next(err);
         const user = new User({
+          email: req.body.email,
           firstName: req.body.firstName,
           lastName: req.body.lastName,
-          username: req.body.username,
-          email: req.body.email,
           password: hashedPassword,
+          username: req.body.username,
           role: 'basic',
         });
         try {

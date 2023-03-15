@@ -17,7 +17,11 @@
           <p>
             Status: <%= currentUser.role %>
           </p>
-          <form class="become-member-container" method="POST" action="<%= '/app/member-validation/' + currentUser.id %>">
+          <form 
+            class="become-member-container"
+            method="POST"
+            action="<%= '/app/member-validation/' + currentUser.id %>"
+          >
             <label for="memberPassword" class="member-info-text">
               Only members with the secret password are able to see who posts are from. Enter your member password below:
             </label>
