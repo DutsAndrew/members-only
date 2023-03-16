@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <% if (typeof(currentUser) !== 'undefined') { %>
+      <% if (currentUser.role === 'member') { %>
+        <% if (typeof(messages) !== 'undefined') { %>
+          <div class="messages-container">
+            <% messages.forEach((message) => { %>
+              <div class="message-container">
+                <div class="message-information">
+                  <p class="message-title">
+                    <%- message.title %>
+                  </p>
+                  <p class="message-title">
+                    <%- message.body %>
+                  </p>
+                  <div class="message-details">
+                    <p class="message-author">
+                      <%= message.author %>
+                    </p>
+                    <p class="message-date">
+                      <%= message.timestamp %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            <% }); %>
+          </div>
+        <% }; %>
+      <% } else { %>
+        <% if (typeof(messages) !== 'undefined') { %>
+          <div class="messages-container">
+            <% messages.forEach((message) => { %>
+              <div class="message-container">
+                <div class="message-information">
+                  <p class="message-title">
+                    <%- message.title %>
+                  </p>
+                  <p class="message-title">
+                    <%- message.body %>
+                  </p>
+                </div>
+              </div>
+            <% }); %>
+          </div>
+      <% }; %>
+    <% }; %>
+  <% }; %>
+  </body>
+</html>

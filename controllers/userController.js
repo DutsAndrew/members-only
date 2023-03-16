@@ -1,8 +1,7 @@
 const { body, validationResult } = require('express-validator'),
       User = require('../models/user'),
       bcrypt = require('bcryptjs'),
-      passport = require('passport'),
-      async = require('async');
+      passport = require('passport');
 
 exports.get_sign_up = (req, res, next) => {
   res.render("account-create", {

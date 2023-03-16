@@ -1,6 +1,6 @@
 const { DateTime } = require('luxon'),
       { body, validationResult } = require('express-validator'),
-      message = require('../models/message');
+      Message = require('../models/message');
 
 exports.get_create_message = (req, res, next) => {
   res.render('message-create', {
@@ -30,7 +30,7 @@ exports.post_create_message = [
         errors: errors.array(),
       });
     } else {
-      const newMessage = new message({
+      const newMessage = new Message({
         author: req.body.author,
         body: req.body.body,
         timestamp: DateTime.now(),
