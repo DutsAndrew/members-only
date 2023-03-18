@@ -24,7 +24,7 @@ const limiter = RateLimit({
 
 // database link in
 mongoose.set('strictQuery', false);
-const mongoDB = process.env.mongoDB_URI || process.env.devDB;
+const mongoDB = process.env.MONGODB_URI || process.env.devDB;
 (async function main() {
   try {
     await mongoose.connect(mongoDB, { useUnifiedTopology: true, useNewUrlParser: true});
