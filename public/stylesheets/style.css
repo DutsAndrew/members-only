@@ -61,7 +61,7 @@ button:hover {
   cursor: pointer;
 }
 
-.return-btn, .create-msg-btn {
+.return-btn, .create-msg-btn, .edit-msg-btn {
   min-width: 15vw;
   max-width: 25vw;
   height: 4.5vh;
@@ -70,7 +70,7 @@ button:hover {
 
 /* sign-up / log-in form styling */
 
-.sign-up-container, .log-in-form-container, .create-message-form-container {
+.sign-up-container, .log-in-form-container, .create-message-form-container, .edit-message-container {
   display: flex;
   flex-flow: column wrap;
   justify-content: flex-start;
@@ -82,11 +82,11 @@ button:hover {
   background-color: #00B7FF;
 }
 
-.sign-up-text, .login-form-text {
+.sign-up-text, .login-form-text, .edit-form-text {
   font-size: 3em;
 }
 
-.sign-up-form, .login-form, .create-message-form {
+.sign-up-form, .login-form, .create-message-form, .edit-message-form {
   display: flex;
   flex-flow: column wrap;
   align-items: center;

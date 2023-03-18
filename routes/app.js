@@ -22,4 +22,7 @@ router.post('/create-message/', messageController.post_create_message);
 router.get('/delete-message/:id', messageController.get_delete_message);
 router.post('/delete-message/:id', messageController.post_delete_message);
 
+router.get('/edit-message/:id', messageController.get_edit_message);
+router.post('/edit-message/:id', messageController.post_edit_message);
+
 module.exports = router;

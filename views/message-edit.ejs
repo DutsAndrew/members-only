@@ -9,7 +9,36 @@
 </head>
 <body>
 
+  <div class="edit-message-container">
+    <h1 class="edit-form-text">
+      <%= title %>
+    </h1>
+    
+      <% if (typeof(message) !== 'undefined') { %>
+        <form class="edit-message-form" method="POST" action="">
+
+          <input
+            type="hidden"
+            name="author"
+            value="<%= typeof(currentUser) === 'undefined' ? '' : currentUser._id %>"
+          >
+
+          <label for="title">
+            Title:
+          </label>
   
+          <input name="title" value="<%= message.title %>">
+
+          <label for="body">
+            Body:
+          </label>
+
+          <textarea class="text-body" name="body"><%= message.body %></textarea>
+  
+          <button class="edit-msg-btn" type="submit">Submit</button>
+        </form>
+      <% }; %>
+  </div>
 
 </body>
 </html>
