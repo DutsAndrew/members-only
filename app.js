@@ -10,9 +10,17 @@ const createError = require('http-errors'),
       session = require('express-session'),
       LocalStrategy = require('passport-local'),
       passport = require('passport');
-      app = express();
+      app = express(),
+      compression = require("compression"),
+      helmet = require("helmet"),
+      RateLimit = require("express-rate-limit");
 
 require("dotenv").config();
+
+const limiter = RateLimit({
+  windowsMs: 1 * 60 * 1000,
+  max: 20,
+});
 
 // database link in
 mongoose.set('strictQuery', false);
@@ -33,6 +41,8 @@ const mongoDB = process.env.devDB;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(helmet());
+app.use(limiter);
 app.use(session({ secret: process.env.secret, resave: false, saveUninitialized: true}));
 
 passport.use(
@@ -73,6 +83,7 @@ app.use(passport.session());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(req, res, next) {
   // provides user in locals variable for all views
