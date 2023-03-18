@@ -53,12 +53,6 @@
                   Body: <%- message.body %>
                 </p>
               </div>
-              <div class="message-details">
-                <p class="message-date">
-                  <em>Time: </em><%= message.timestamp.split('T')[0] %>,
-                  <%= message.timestamp.split("T")[1].split(".")[0] %>
-                </p>
-              </div>
             </div>
           <% }); %>
         </div>
