@@ -39,6 +39,37 @@
             <% }); %>
           </div>
         <% }; %>
+      <% } else { %>
+        <% if (typeof(messages) !== 'undefined') { %>
+            <div class="messages-container">
+              <% messages.forEach((message) => { %>
+                <div class="message-container">
+                  <div class="message-information">
+                    <p class="message-title">
+                      <strong>Title: </strong><%- message.title %>
+                    </p>
+                    <p class="message-title">
+                      Body: <%- message.body %>
+                    </p>
+                  </div>
+                  <% if (currentUser.username === message.author.username) { %>
+                    <div class="author-message-options">
+                      <a href="<%= '/app/edit-message/' + message._id %>">
+                        <button class="edit message">
+                          Edit Message
+                        </button>
+                      </a>
+                      <a href="<%= '/app/delete-message/' + message._id %>">
+                        <button class="edit message">
+                          Delete Message
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                  <% }; %>
+                </div>
+              <% }); %>
+        <% }; %>
       <% }; %>
     <% } else { %>
       <% if (typeof(messages) !== 'undefined') { %>
