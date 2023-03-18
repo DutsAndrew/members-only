@@ -13,17 +13,17 @@
               <div class="message-container">
                 <div class="message-information">
                   <p class="message-title">
-                    <%- message.title %>
+                    <strong>Title:</strong> <%- message.title %>
                   </p>
                   <p class="message-title">
-                    <%- message.body %>
+                    Body: <%- message.body %>
                   </p>
                   <div class="message-details">
                     <p class="message-author">
-                      <%= message.author.username %>
+                      <em>Author: </em><%= message.author.username %>
                     </p>
                     <p class="message-date">
-                      <%= message.timestamp.split('T')[0] %>,
+                      <em>Time: </em><%= message.timestamp.split('T')[0] %>,
                       <%= message.timestamp.split("T")[1].split(".")[0] %>
                     </p>
                   </div>
@@ -39,24 +39,30 @@
             <% }); %>
           </div>
         <% }; %>
-      <% } else { %>
-        <% if (typeof(messages) !== 'undefined') { %>
-          <div class="messages-container">
-            <% messages.forEach((message) => { %>
-              <div class="message-container">
-                <div class="message-information">
-                  <p class="message-title">
-                    <%- message.title %>
-                  </p>
-                  <p class="message-title">
-                    <%- message.body %>
-                  </p>
-                </div>
+      <% }; %>
+    <% } else { %>
+      <% if (typeof(messages) !== 'undefined') { %>
+        <div class="messages-container">
+          <% messages.forEach((message) => { %>
+            <div class="message-container">
+              <div class="message-information">
+                <p class="message-title">
+                  <strong>Title: </strong><%- message.title %>
+                </p>
+                <p class="message-title">
+                  Body: <%- message.body %>
+                </p>
               </div>
-            <% }); %>
-          </div>
+              <div class="message-details">
+                <p class="message-date">
+                  <em>Time: </em><%= message.timestamp.split('T')[0] %>,
+                  <%= message.timestamp.split("T")[1].split(".")[0] %>
+                </p>
+              </div>
+            </div>
+          <% }); %>
+        </div>
       <% }; %>
     <% }; %>
-  <% }; %>
   </body>
 </html>
