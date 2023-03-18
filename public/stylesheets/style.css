@@ -1,8 +1,194 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  overflow: hidden;
 }
 
 a {
   color: #00B7FF;
+}
+
+input {
+  height: 2.5vh;
+  font-size: 1em;
+}
+
+.auth-sidebar, .membership-container {
+  display: flex;
+  flex: auto;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  padding-top: 3vh;
+  font-size: 1em;
+  background-color: #00B7FF;
+  min-width: 18vw;
+  max-width: 25vw;
+  height: 100vh;
+}
+
+.main {
+  display: flex;
+  flex: auto;
+  flex-flow: column wrap;
+  position: absolute;
+  right: 0;
+  margin: 0;
+  margin-right: 2vw;
+  padding-right: 2vw;
+  padding-left: 2vw;
+  font-size: 1em;
+  height: 100vh;
+  min-width: 66vw;
+  max-width: 72vw;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+/* auth-sidebar styling */
+
+.auth-btn {
+  min-width: 15vw;
+  max-widht: 25vw;
+  height: 4vh;
+  border-radius: 5px;
+  font-size: 1.15em;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.return-btn, .create-msg-btn {
+  min-width: 15vw;
+  max-width: 25vw;
+  height: 4.5vh;
+  font-size: 1em;
+}
+
+/* sign-up / log-in form styling */
+
+.sign-up-container, .log-in-form-container, .create-message-form-container {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 5vh;
+  width: 50vw;
+  height: 60vh;
+  margin: auto;
+  background-color: #00B7FF;
+}
+
+.sign-up-text, .login-form-text {
+  font-size: 3em;
+}
+
+.sign-up-form, .login-form, .create-message-form {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  width: auto;
+  height: auto;
+  gap: 2.5vh;
+  font-size: 1.5em;
+}
+
+.form-submit-btn {
+  max-width: 60%;
+  min-width: 30%;
+  height: 3vh;
+}
+
+/* account-shortcuts */
+
+.member-status {
+  font-size: 1.5em;
+}
+
+.app-information-container {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+
+.title-header {
+  margin: 0;
+  margin-bottom: 0.5vh;
+}
+
+.welcome-text {
+  margin: 0;
+  margin-bottom: 2.5vh;
+}
+
+.become-member-container {
+  display: flex;
+  flex-flow: column wrap;
+  border: 1px solid black;
+  padding: 0.5vw;
+  margin: 0;
+  margin-top: 3vh;
+  font-size: 1.25em;
+  gap: 1vh;
+}
+
+.form-btn {
+  height: 3vh;
+}
+
+/* create message form */
+
+.create-message-form-container {
+  gap: 2vh;
+}
+
+.text-body {
+  width: 110%;
+  min-height: 15vh;
+}
+
+.not-a-link {
+  text-decoration: none;
+}
+
+/* message container */
+
+.messages-container {
+  margin: 0;
+  margin-top: 2vh;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.message-container {
+  width: 95%;
+  min-height: 5vh;
+  max-height: 30vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-radius: 10px;
+  background-color: coral;
+  padding: 1vw;
+}
+
+.message-details {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.delete-message-button {
+  margin: 0.5vw;
+  border-radius: 10px;
 }

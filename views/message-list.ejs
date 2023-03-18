@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
   <body>
     <% if (typeof(currentUser) !== 'undefined') { %>
       <% if (currentUser.role === 'member' || currentUser.role === 'admin') { %>
@@ -16,14 +12,14 @@
                     <strong>Title:</strong> <%- message.title %>
                   </p>
                   <p class="message-title">
-                    Body: <%- message.body %>
+                    <strong>Body: </strong><%- message.body %>
                   </p>
                   <div class="message-details">
                     <p class="message-author">
-                      <em>Author: </em><%= message.author.username %>
+                      <strong><em>Author: </em></strong><%= message.author.username %>
                     </p>
                     <p class="message-date">
-                      <em>Time: </em><%= message.timestamp.split('T')[0] %>,
+                      <strong><em>Time: </em></strong><%= message.timestamp.split('T')[0] %>,
                       <%= message.timestamp.split("T")[1].split(".")[0] %>
                     </p>
                   </div>
@@ -49,26 +45,26 @@
                       <strong>Title: </strong><%- message.title %>
                     </p>
                     <p class="message-title">
-                      Body: <%- message.body %>
+                      <strong>Body: </strong><%- message.body %>
                     </p>
                   </div>
                   <% if (currentUser.username === message.author.username) { %>
                     <div class="author-message-options">
-                      <a href="<%= '/app/edit-message/' + message._id %>">
+                      <a class="not-a-link" href="<%= '/app/edit-message/' + message._id %>">
                         <button class="edit message">
                           Edit Message
                         </button>
                       </a>
-                      <a href="<%= '/app/delete-message/' + message._id %>">
+                      <a class="not-a-link" href="<%= '/app/delete-message/' + message._id %>">
                         <button class="edit message">
                           Delete Message
                         </button>
                       </a>
                     </div>
-                  </div>
                   <% }; %>
                 </div>
               <% }); %>
+            </div>
         <% }; %>
       <% }; %>
     <% } else { %>
@@ -81,7 +77,7 @@
                   <strong>Title: </strong><%- message.title %>
                 </p>
                 <p class="message-title">
-                  Body: <%- message.body %>
+                  <strong>Body: </strong><%- message.body %>
                 </p>
               </div>
             </div>

@@ -5,29 +5,26 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <% if (typeof(user) !== 'undefined') { %>
-      <div class="account-shortcuts-container">
-        <a href="/app/log-out">
-          <button class="sign-out-btn">
-            Sign Out
-          </button>
-        </a>
-        <%- include('member-check') -%>
-      </div>
-    <% } else { %>
-      <%- include('auth-sidebar') -%>
-    <% }; %>
     
-    <h1><%= title %></h1>
-
-    <% if (typeof(user) !== 'undefined') { %>
-      <h2><%= userMessage + user.username %></h2>
-      <a href="/app/create-message">Create Message</a>
-    <% }; %>
-
-    <p><%= welcome %></p>
-
-    <%- include('message-list') -%>
+    <div class="coupled-container">
+      <div class="account-shortcuts-container">
+        <% if (typeof(user) !== 'undefined') { %>
+          <%- include('member-check') -%>
+        <% } else { %>
+          <%- include('auth-sidebar') -%>
+        <% }; %>
+      </div>
+        
+      <div class="main">
+       <div class="app-information-container">
+        <h1 class="title-header"><%= title %></h1>
+  
+        <p class="latest-messages-text"><%= welcome %></p>
+       </div>
+  
+        <%- include('message-list') -%>
+      </div>
+    </div>
     
   </body>
 </html>

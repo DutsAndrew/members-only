@@ -5,16 +5,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
 
-  <a href="/app">
-    <button class="return-btn">
-      Return to Home
-    </button>
-  </a>
+  <div class="create-message-form-container">
 
-  <div class="form-container">
+    <a href="/app">
+      <button class="return-btn">
+        Return to Home
+      </button>
+    </a>
+
     <form class="create-message-form" method="POST" action="">
 
       <input
@@ -34,7 +36,7 @@
         <label for="body">
           Body:
         </label>
-        <input type="text" name="body" value="<%= typeof(messageBody) === 'undefined' ? '' : messageBody %>">
+        <textarea class="text-body" type="text" name="body" value="<%= typeof(messageBody) === 'undefined' ? '' : messageBody %>"></textarea>
       </div>
 
       <button class="form-submit-btn">

@@ -1,29 +1,47 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
   <body>
 
     <div class="membership-container">
-
       <% if (typeof(currentUser) !== 'undefined') { %>
         <% if (currentUser.role === "member" || currentUser.role === 'admin') { %>
-          <p>
+          <a href="/app/log-out">
+            <button class="return-btn">
+              Sign Out
+            </button>
+          </a>
+
+          <p class="member-status">
             Status: <%= currentUser.role %>
           </p>
+
+          <h2 class="welcome-text"><%= userMessage + user.username %></h2>
+          <a class="create-message-text" href="/app/create-message">
+            <button class="create-msg-btn">Create Message</button>
+          </a>
         <% } else { %>
-          <p>
+          <a href="/app/log-out">
+            <button class="return-btn">
+              Sign Out
+            </button>
+          </a>
+
+          <p class="member-status">
             Status: <%= currentUser.role %>
           </p>
+
+          <h2 class="welcome-text"><%= userMessage + user.username %></h2>
+          <a class="create-message-text" href="/app/create-message">
+            <button class="create-msg-btn">Create Message</button>
+          </a>
+
           <form 
             class="become-member-container"
             method="POST"
             action="<%= '/app/member-validation/' + currentUser.id %>"
           >
             <label for="memberPassword" class="member-info-text">
-              Only members with the secret password are able to see who posts are from. Enter your member password below:
+              Only members can see who posts are from and when they were posted. Enter your membership password below to gain access.
             </label>
             <input type="password" name="memberPassword" id="memberPassword">
             <button class="form-btn" type="submit">
