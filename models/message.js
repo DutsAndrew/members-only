@@ -19,13 +19,11 @@ const messageSchema = new Schema({
     minLength: 1,
     maxLength: 10000,
   },
-  author: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Owner',
-      required: true,
-    },
-  ],
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Message", messageSchema);

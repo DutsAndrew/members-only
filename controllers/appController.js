@@ -5,7 +5,7 @@ const async = require('async'),
 
 exports.index = async (req, res, next) => {
   try {
-    const messages = await Message.find();
+    const messages = await Message.find().populate("author");
 
     // remove escaped characters like ' or " used in sentences.
     messages.forEach((message) => {

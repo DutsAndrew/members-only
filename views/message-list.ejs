@@ -20,10 +20,11 @@
                   </p>
                   <div class="message-details">
                     <p class="message-author">
-                      <%= message.author %>
+                      <%= message.author.username %>
                     </p>
                     <p class="message-date">
-                      <%= message.timestamp %>
+                      <%= message.timestamp.split('T')[0] %>,
+                      <%= message.timestamp.split("T")[1].split(".")[0] %>
                     </p>
                   </div>
                 </div>
