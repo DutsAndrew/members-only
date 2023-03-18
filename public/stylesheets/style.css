@@ -70,26 +70,15 @@ button:hover {
 
 /* sign-up / log-in form styling */
 
-.sign-up-container {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-  padding-top: 2vh;
-  width: 50vw;
-  height: 60vh;
-  margin: auto;
-  background-color: #00B7FF;
-}
-
-.log-in-form-container, .create-message-form-container, .edit-message-container {
+.sign-up-container, .log-in-form-container, .create-message-form-container, .edit-message-container {
   display: flex;
   flex-flow: column wrap;
   justify-content: flex-start;
   align-items: center;
   padding-top: 5vh;
   width: 50vw;
-  height: 60vh;
+  min-height: 70vh;
+  max-height: 90vh;
   margin: auto;
   background-color: #00B7FF;
 }
