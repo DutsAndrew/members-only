@@ -19,4 +19,7 @@ router.post('/member-validation/:id', userController.post_become_member);
 router.get('/create-message/', messageController.get_create_message);
 router.post('/create-message/', messageController.post_create_message);
 
+router.get('/delete-message/:id', messageController.get_delete_message);
+router.post('/delete-message/:id', messageController.post_delete_message);
+
 module.exports = router;

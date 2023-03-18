@@ -45,3 +45,20 @@ exports.post_create_message = [
     };
   },
 ];
+
+exports.get_delete_message = async (req, res, next) => {
+  const messageToDelete = await Message.findById(req.params.id);
+  res.render("message-delete", {
+    title: "Delete this Message",
+    message: messageToDelete,
+  });
+};
+
+exports.post_delete_message = async(req, res, next) => {
+  try {
+    const deleteMessage = await Message.findByIdAndRemove(req.params.id);
+    res.redirect('/app');
+  } catch(err) {
+    return next(err);
+  };
+};

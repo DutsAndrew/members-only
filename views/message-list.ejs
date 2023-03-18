@@ -6,7 +6,7 @@
   </head>
   <body>
     <% if (typeof(currentUser) !== 'undefined') { %>
-      <% if (currentUser.role === 'member') { %>
+      <% if (currentUser.role === 'member' || currentUser.role === 'admin') { %>
         <% if (typeof(messages) !== 'undefined') { %>
           <div class="messages-container">
             <% messages.forEach((message) => { %>
@@ -28,6 +28,13 @@
                     </p>
                   </div>
                 </div>
+                <% if (currentUser.role === 'admin') { %>
+                  <a href="<%= '/app/delete-message/' + message._id %>">
+                    <button class="delete-message-button">
+                      Delete Message
+                    </button>
+                  </a>
+                <% }; %>
               </div>
             <% }); %>
           </div>

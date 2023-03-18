@@ -9,7 +9,7 @@
     <div class="membership-container">
 
       <% if (typeof(currentUser) !== 'undefined') { %>
-        <% if (currentUser.role === "member") { %>
+        <% if (currentUser.role === "member" || currentUser.role === 'admin') { %>
           <p>
             Status: <%= currentUser.role %>
           </p>

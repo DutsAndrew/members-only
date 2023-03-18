@@ -8,7 +8,36 @@
 </head>
 <body>
 
-  
+<h1>
+  <%= title %>
+</h1>
+
+<p>
+  Are you sure you want to delete this message?
+</p>
+
+<div class="message-container">
+  <div class="message-information">
+    <p class="message-title">
+      <%- message.title %>
+    </p>
+    <p class="message-title">
+      <%- message.body %>
+    </p>
+    <div class="message-details">
+      <p class="message-author">
+        <%= message.author.username %>
+      </p>
+      <p class="message-date">
+        <%= message.timestamp.split('T')[0] %>,
+        <%= message.timestamp.split("T")[1].split(".")[0] %>
+      </p>
+    </div>
+  </div>
+
+  <form class="delete-message-form" method="POST" action="">
+    <button type="submit">Yes, Delete this Message</button>
+  </form>
 
 </body>
 </html>
