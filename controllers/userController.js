@@ -112,12 +112,14 @@ exports.post_log_in = [
         },
       });
     } else {
-      passport.authenticate("local", {
-        successRedirect: "/app",
-        failureRedirect: "/app/log-in",
-      });
+      next();
     };
   },
+
+  passport.authenticate("local", {
+    successRedirect: "/app",
+    failureRedirect: "/app/log-in",
+  }),
 ];
 
 exports.get_log_out = (req, res, next) => {
